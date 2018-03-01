@@ -3,6 +3,8 @@
 // TODO -
 //    - 
 
+var boardClicked = 0;
+
 function Product (name, filepath) {
     this.name = name;
     this.filepath = filepath;
@@ -71,38 +73,38 @@ const analysis = {
 }
 
 function registerImageClick() {
-
+    console.log(boardClicked);    
     analysis.clearBoard();
     analysis.randomizeProducts();
     analysis.showProducts();
+
+    boardClicked++;
+    if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
+        const elContainer = document.getElementById('button-container');
+        const elButton = document.createElement('button');
+        elButton.id='button';
+        elButton.textContent = 'See Totals';
+        elContainer.appendChild(elButton);
+    } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
+        const buttonToRemove = document.getElementById('button');
+        const elContainer = document.getElementById('button-container');
+        elContainer = buttonToRemove.parentNode;
+        elContainer.removeChild(buttonToRemove);
+    }
 
     if (event.target.tagName === 'IMG') {
         const index = event.target.src.lastIndexOf('/') + 1;
         const strIndex = event.target.src.substring(index);
         const slicedIndex = strIndex.slice(0, -4);
-        console.log(strIndex.slice(0, -4));
+        //console.log(strIndex.slice(0, -4));
         for (let i = 0; i < analysis.products.length; i++) {
             const product = analysis.products[i];
             if (slicedIndex === product.name) {
                 product.timesClicked++;
-                console.log(product.timesClicked);
+                //console.log(product.timesClicked);
             }
         }
     }
 }
 
 analysis.start();
-
-// if  === product.name, timesClicked++
-
-
-// function addListeners() {
-//     document.getElementById("pictures").addEventListener("click", registerImageClick);
-//     console.log('listening');
-// }
-
-// function registerImageClick(event) {
-
-// }
-
-// window.addEventListener("load", addListeners);
