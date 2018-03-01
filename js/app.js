@@ -1,12 +1,15 @@
 'use strict';
 
 // TODO
-// - show images dynamically
-//    - show all through render function, remove from html
+// - show 3 random images
+//    - push to selectedProducts
+//    - need to pick 3 new random imgs every click
 
 function Product (name, filepath) {
     this.name = name;
     this.filepath = filepath;
+    this.timesShown = 0;
+    this.timesClicked = 0;
 }
 
 Product.prototype.render = function () {
@@ -36,24 +39,43 @@ const analysis = {
             new Product('wine-glass', 'img/wine_glass.jpg'),
         );
         
+        this.randomizeProducts();
         this.showProducts();
         
         const elContainer = document.getElementById('images-container');
         elContainer.addEventListener('click', registerImageClick);
     },
 
+    randomizeProducts: function () {
+        this.selectedProducts = [];
+        while (this.selectedProducts.length < 3) {
+            const randomNum = Math.floor(Math.random() * this.products.length);
+            const product = this.products[randomNum];
+            if (!this.selectedProducts.includes(product)) {
+                product.timesShown++;
+                this.selectedProducts.push(product);
+                //console.log(this.selectedProducts);
+            }
+        }
+        return this.selectedProducts;
+    },
+
     showProducts: function () {
         const elContainer = document.getElementById('images-container');
-        for (let i = 0; i < this.products.length; i++) {
-            elContainer.appendChild(this.products[i].render());
+        for (let i = 0; i < this.selectedProducts.length; i++) {
+            elContainer.appendChild(this.selectedProducts[i].render());
         }
     }
 }
 
 function registerImageClick() {
+
+    analysis.randomizeProducts();
+    analysis.showProducts();
+
     if (event.target.tagName === 'IMG') {
         const index = event.target.src.lastIndexOf('/');
-        console.log(event.target.src.substring(index + 1));
+        //console.log(event.target.src.substring(index + 1));
     }
 }
 
