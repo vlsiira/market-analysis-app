@@ -1,8 +1,7 @@
 'use strict';
 
-// TODO
-// - clear board after each click
-//    - textContent = ''
+// TODO -
+//    - 
 
 function Product (name, filepath) {
     this.name = name;
@@ -34,8 +33,8 @@ const analysis = {
             new Product('sweep', 'img/sweep.jpg'),
             new Product('unicorn', 'img/unicorn.jpg'),
             new Product('usb', 'img/usb.jpg'),
-            new Product('water-can', 'img/water_can.jpg'),
-            new Product('wine-glass', 'img/wine_glass.jpg'),
+            new Product('water_can', 'img/water_can.jpg'),
+            new Product('wine_glass', 'img/wine_glass.jpg'),
         );
         
         this.randomizeProducts();
@@ -53,7 +52,6 @@ const analysis = {
             if (!this.selectedProducts.includes(product)) {
                 product.timesShown++;
                 this.selectedProducts.push(product);
-                //console.log(this.selectedProducts);
             }
         }
         return this.selectedProducts;
@@ -79,12 +77,23 @@ function registerImageClick() {
     analysis.showProducts();
 
     if (event.target.tagName === 'IMG') {
-        const index = event.target.src.lastIndexOf('/');
-        //console.log(event.target.src.substring(index + 1));
+        const index = event.target.src.lastIndexOf('/') + 1;
+        const strIndex = event.target.src.substring(index);
+        const slicedIndex = strIndex.slice(0, -4);
+        console.log(strIndex.slice(0, -4));
+        for (let i = 0; i < analysis.products.length; i++) {
+            const product = analysis.products[i];
+            if (slicedIndex === product.name) {
+                product.timesClicked++;
+                console.log(product.timesClicked);
+            }
+        }
     }
 }
 
 analysis.start();
+
+// if  === product.name, timesClicked++
 
 
 // function addListeners() {
