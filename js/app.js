@@ -87,8 +87,7 @@ function registerImageClick() {
         elContainer.appendChild(elButton);
     } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
         const buttonToRemove = document.getElementById('button');
-        const elContainer = document.getElementById('button-container');
-        elContainer = buttonToRemove.parentNode;
+        const elContainer = buttonToRemove.parentNode;
         elContainer.removeChild(buttonToRemove);
     }
 
