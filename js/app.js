@@ -1,9 +1,8 @@
 'use strict';
 
 // TODO
-// - show 3 random images
-//    - push to selectedProducts
-//    - need to pick 3 new random imgs every click
+// - clear board after each click
+//    - textContent = ''
 
 function Product (name, filepath) {
     this.name = name;
@@ -65,11 +64,17 @@ const analysis = {
         for (let i = 0; i < this.selectedProducts.length; i++) {
             elContainer.appendChild(this.selectedProducts[i].render());
         }
+    },
+
+    clearBoard: function () {
+        const elContainer = document.getElementById('images-container');
+        elContainer.textContent = '';
     }
 }
 
 function registerImageClick() {
 
+    analysis.clearBoard();
     analysis.randomizeProducts();
     analysis.showProducts();
 
