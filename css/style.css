@@ -1,3 +1,23 @@
+h1 {
+    font-family: 'Forum', cursive;
+}
+
+h2 {
+    font-family: 'Karma', serif;
+}
+
+section {
+    margin: 10px;
+    border: 3px solid blue;
+    padding: 10px;
+}
+
+section img {
+    margin: 5px;
+    border: 1px solid black;
+    padding: 5px;
+}
+
 img {
     width: 300px;
 }

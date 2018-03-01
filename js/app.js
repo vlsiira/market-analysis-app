@@ -1,6 +1,6 @@
 'use strict';
 
-// TODO -
+// TODO - display list of objects & totals after clicking button
 //    - 
 
 var boardClicked = 0;
@@ -44,8 +44,9 @@ const analysis = {
         
         const elContainer = document.getElementById('images-container');
         elContainer.addEventListener('click', registerImageClick);
-    },
 
+    },
+    
     randomizeProducts: function () {
         this.selectedProducts = [];
         while (this.selectedProducts.length < 3) {
@@ -57,15 +58,16 @@ const analysis = {
             }
         }
         return this.selectedProducts;
-    },
 
+    },
+    
     showProducts: function () {
         const elContainer = document.getElementById('images-container');
         for (let i = 0; i < this.selectedProducts.length; i++) {
             elContainer.appendChild(this.selectedProducts[i].render());
         }
     },
-
+    
     clearBoard: function () {
         const elContainer = document.getElementById('images-container');
         elContainer.textContent = '';
@@ -77,7 +79,7 @@ function registerImageClick() {
     analysis.clearBoard();
     analysis.randomizeProducts();
     analysis.showProducts();
-
+    
     boardClicked++;
     if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
         const elContainer = document.getElementById('button-container');
@@ -85,12 +87,14 @@ function registerImageClick() {
         elButton.id='button';
         elButton.textContent = 'See Totals';
         elContainer.appendChild(elButton);
+
+        
     } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
         const buttonToRemove = document.getElementById('button');
         const elContainer = buttonToRemove.parentNode;
         elContainer.removeChild(buttonToRemove);
     }
-
+    
     if (event.target.tagName === 'IMG') {
         const index = event.target.src.lastIndexOf('/') + 1;
         const strIndex = event.target.src.substring(index);
@@ -100,10 +104,16 @@ function registerImageClick() {
             const product = analysis.products[i];
             if (slicedIndex === product.name) {
                 product.timesClicked++;
-                //console.log(product.timesClicked);
+                //console.log(product.name, product.timesClicked);
             }
         }
     }
+}
+const elButtonContainer = document.getElementById('button-container');
+elButtonContainer.addEventListener('click', registerButtonClick);
+
+function registerButtonClick() {
+    console.log('clicked');
 }
 
 analysis.start();
