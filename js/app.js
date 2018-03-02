@@ -93,6 +93,10 @@ function registerImageClick() {
         const buttonToRemove = document.getElementById('button');
         const elContainer = buttonToRemove.parentNode;
         elContainer.removeChild(buttonToRemove);
+        const list = document.getElementById('list-container');
+        if (list.style.display !== 'none') {
+            list.style.display = 'none';
+        }
     }
     
     if (event.target.tagName === 'IMG') {
