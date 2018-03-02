@@ -45,7 +45,6 @@ const analysis = {
         const elContainer = document.getElementById('images-container');
         elContainer.addEventListener('click', registerImageClick);
 
-        // not working - handler at line 116
         const elButtonContainer = document.getElementById('button-container');
         elButtonContainer.addEventListener('click', registerButtonClick);
     },
@@ -61,7 +60,6 @@ const analysis = {
             }
         }
         return this.selectedProducts;
-
     },
     
     showProducts: function () {
@@ -91,7 +89,6 @@ function registerImageClick() {
         elButton.textContent = 'See Totals';
         elContainer.appendChild(elButton);
 
-        
     } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
         const buttonToRemove = document.getElementById('button');
         const elContainer = buttonToRemove.parentNode;
@@ -114,6 +111,12 @@ function registerImageClick() {
 }
 
 function registerButtonClick() {
+    const elListContainer = document.getElementById('list-container');
+    for (let i = 0; i < analysis.products.length; i++) {
+        const elListItem = document.createElement('li');
+        elListItem.textContent = analysis.products[i].timesClicked + ' votes for ' + analysis.products[i].name;
+        elListContainer.appendChild(elListItem);
+    }
     console.log('clicked');
 }
 
