@@ -1,7 +1,7 @@
 'use strict';
 
-// TODO - display list of objects & totals after clicking button
-//    - 
+// TODO - bug to fix - See Totals button only works (shows list), on 1st round of 15 clicks
+//    - it keeps counting clicks though, whether button clicked or not
 
 var boardClicked = 0;
 
@@ -88,6 +88,8 @@ function registerImageClick() {
         elButton.id='button';
         elButton.textContent = 'See Totals';
         elContainer.appendChild(elButton);
+        // const list = document.getElementById('list-container');
+        // if (list)
 
     } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
         const buttonToRemove = document.getElementById('button');
@@ -121,7 +123,6 @@ function registerButtonClick() {
         elListItem.textContent = analysis.products[i].timesClicked + ' votes for ' + analysis.products[i].name;
         elListContainer.appendChild(elListItem);
     }
-    console.log('clicked');
 }
 
 analysis.start();
