@@ -10,14 +10,17 @@ section {
     margin: 10px;
     border: 3px solid blue;
     padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 section img {
     margin: 5px;
     border: 1px solid black;
-    padding: 5px;
+    /* padding: 5px; */
 }
 
 img {
-    width: 300px;
+    height: 250px;
 }

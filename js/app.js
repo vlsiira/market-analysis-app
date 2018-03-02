@@ -45,6 +45,9 @@ const analysis = {
         const elContainer = document.getElementById('images-container');
         elContainer.addEventListener('click', registerImageClick);
 
+        // not working - handler at line 116
+        const elButtonContainer = document.getElementById('button-container');
+        elButtonContainer.addEventListener('click', registerButtonClick);
     },
     
     randomizeProducts: function () {
@@ -109,8 +112,6 @@ function registerImageClick() {
         }
     }
 }
-const elButtonContainer = document.getElementById('button-container');
-elButtonContainer.addEventListener('click', registerButtonClick);
 
 function registerButtonClick() {
     console.log('clicked');
