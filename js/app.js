@@ -116,16 +116,22 @@ function registerImageClick() {
 
 function registerButtonClick() {
     const elListContainer = document.getElementById('list-container');
-    for (let i = 0; i < analysis.products.length; i++) {
-        const elListItem = document.createElement('li');
+    if (boardClicked < 20) {
+        for (let i = 0; i < analysis.products.length; i++) {
+            const elListItem = document.createElement('li');
+            elListItem.textContent = analysis.products[i].timesClicked + ' votes for ' + analysis.products[i].name;
+            elListContainer.appendChild(elListItem);
+        } 
+    } else {
+        for (let i = 0; i < analysis.products.length; i++) {
+        const elListItem = document.getElementsByTagName('li');
         elListItem.textContent = analysis.products[i].timesClicked + ' votes for ' + analysis.products[i].name;
-        elListContainer.appendChild(elListItem);
+        const list = document.getElementById('list-container');    
+        if (list.style.display = 'none') {
+            list.style.display = 'block';
+            }
+        }
     }
-    const list = document.getElementById('list-container');    
-    if (list.style.display = 'none') {
-        list.style.display = 'block';
-    }
-    
 }
 
 analysis.start();
