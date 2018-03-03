@@ -88,9 +88,7 @@ function registerImageClick() {
         elButton.id='button';
         elButton.textContent = 'See Totals';
         elContainer.appendChild(elButton);
-        // const list = document.getElementById('list-container');
-        // if (list)
-
+        
     } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
         const buttonToRemove = document.getElementById('button');
         const elContainer = buttonToRemove.parentNode;
@@ -123,6 +121,11 @@ function registerButtonClick() {
         elListItem.textContent = analysis.products[i].timesClicked + ' votes for ' + analysis.products[i].name;
         elListContainer.appendChild(elListItem);
     }
+    const list = document.getElementById('list-container');    
+    if (list.style.display = 'none') {
+        list.style.display = 'block';
+    }
+    
 }
 
 analysis.start();
