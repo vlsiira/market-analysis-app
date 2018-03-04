@@ -2,12 +2,8 @@ body {
     background-color: #FCFEEF;
 }
 
-hgroup {
-    display: flex;
-    justify-content: center;
-}
-
 h1 {
+    text-align: center;
     font-family: 'Forum', cursive;
     color: #4E5903;
 }
