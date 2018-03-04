@@ -3,10 +3,10 @@
 let boardClicked = 0;
 
 function Product (name, filepath) {
-    this.name = name;
+    this.label = name;
     this.filepath = filepath;
     this.timesShown = 0;
-    this.timesClicked = 0;
+    this.y = 0;
 }
 
 Product.prototype.render = function () {
@@ -19,7 +19,7 @@ const analysis = {
     products: [],
     selectedProducts: [],
     start: function () {
-        this.products.push(
+        analysis.products.push(
             new Product ('bag', 'img/bag.jpg'),
             new Product('banana', 'img/banana.jpg'),
             new Product('boots', 'img/boots.jpg'),
@@ -35,37 +35,37 @@ const analysis = {
             new Product('water_can', 'img/water_can.jpg'),
             new Product('wine_glass', 'img/wine_glass.jpg'),
         );
-        
-        this.randomizeProducts();
-        this.showProducts();
-        
+
+        analysis.randomizeProducts();
+        analysis.showProducts();
+
         const elContainer = document.getElementById('images-container');
         elContainer.addEventListener('click', registerImageClick);
 
         const elButtonContainer = document.getElementById('button-container');
         elButtonContainer.addEventListener('click', registerButtonClick);
     },
-    
+
     randomizeProducts: function () {
-        this.selectedProducts = [];
+        analysis.selectedProducts = [];
         while (this.selectedProducts.length < 3) {
-            const randomNum = Math.floor(Math.random() * this.products.length);
-            const product = this.products[randomNum];
-            if (!this.selectedProducts.includes(product)) {
-                this.selectedProducts.push(product);
+            const randomNum = Math.floor(Math.random() * analysis.products.length);
+            const product = analysis.products[randomNum];
+            if (!analysis.selectedProducts.includes(product)) {
+                analysis.selectedProducts.push(product);
                 product.timesShown++;
             }
         }
-        return this.selectedProducts;
+        return analysis.selectedProducts;
     },
-    
+
     showProducts: function () {
         const elContainer = document.getElementById('images-container');
-        for (let i = 0; i < this.selectedProducts.length; i++) {
-            elContainer.appendChild(this.selectedProducts[i].render());
+        for (let i = 0; i < analysis.selectedProducts.length; i++) {
+            elContainer.appendChild(analysis.selectedProducts[i].render());
         }
     },
-    
+
     clearBoard: function () {
         const elContainer = document.getElementById('images-container');
         elContainer.textContent = '';
@@ -73,11 +73,11 @@ const analysis = {
 }
 
 function registerImageClick() {
-    console.log(boardClicked);    
+    console.log(boardClicked);
     analysis.clearBoard();
     analysis.randomizeProducts();
     analysis.showProducts();
-    
+
     boardClicked++;
     if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
         const elButtonContainer = document.getElementById('button-container');
@@ -85,7 +85,7 @@ function registerImageClick() {
         elButton.id='button';
         elButton.textContent = 'See Totals';
         elButtonContainer.appendChild(elButton);
-        
+
     } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
         const buttonToRemove = document.getElementById('button');
         const elContainer = buttonToRemove.parentNode;
@@ -95,15 +95,15 @@ function registerImageClick() {
             elListContainer.style.display = 'none';
         }
     }
-    
+
     if (event.target.tagName === 'IMG') {
         const index = event.target.src.lastIndexOf('/') + 1;
         const strIndex = event.target.src.substring(index);
         const slicedIndex = strIndex.slice(0, -4);
         for (let i = 0; i < analysis.products.length; i++) {
             const product = analysis.products[i];
-            if (slicedIndex === product.name) {
-                product.timesClicked++;
+            if (slicedIndex === product.label) {
+                product.y++;
             }
         }
     }
@@ -112,20 +112,55 @@ function registerImageClick() {
 function registerButtonClick() {
     const elListContainer = document.getElementById('list-container');
     if (boardClicked < 16) {
-        for (let i = 0; i < analysis.products.length; i++) {
-            const elListItem = document.createElement('li');
-            elListItem.textContent = analysis.products[i].name + ' shown ' + analysis.products[i].timesShown + ' times, and voted for ' + analysis.products[i].timesClicked + ' times.';
-            elListContainer.appendChild(elListItem);
-        } 
-    } else {
-        for (let i = 0; i < analysis.products.length; i++) {
-        const elListItem = document.getElementsByTagName('li');
-        elListItem.textContent = analysis.products[i].name + ' shown ' + analysis.products[i].timesShown + ' times, and voted for ' + analysis.products[i].timesClicked + ' times.';
-        if (elListContainer.style.display = 'none') {
-            elListContainer.style.display = 'block';
-            }
-        }
+      buildChart();
+    //
+    //     for (let i = 0; i < analysis.products.length; i++) {
+    //         const elListItem = document.createElement('li');
+    //         elListItem.textContent = analysis.products[i].label + ' shown ' + analysis.products[i].timesShown + ' times, and voted for ' + analysis.products[i].y + ' times.';
+    //         elListContainer.appendChild(elListItem);
+    //     }
+    // } else {
+    //   buildChart();
+    //     for (let i = 0; i < analysis.products.length; i++) {
+    //     const elListItem = document.getElementsByTagName('li');
+    //     elListItem.textContent = analysis.products[i].label + ' shown ' + analysis.products[i].timesShown + ' times, and voted for ' + analysis.products[i].y + ' times.';
+    //     if (elListContainer.style.display = 'none') {
+    //         elListContainer.style.display = 'block';
+    //         }
+    //     }
     }
 }
 
-analysis.start();
+//
+//   console.log("test string", analysis.products.name);
+//
+// function addTimesClicked() {
+//   for (let index = 0; index < images.length; index++) {
+//   // images.y.textContent = analysis.products[index].timesClicked;
+//
+//   }
+// }
+//
+// addTimesClicked();
+
+function buildChart() {
+	var chart = new CanvasJS.Chart("chart-container", {
+		title:{
+			text: "Totals"
+		},
+		data: [
+		{
+			// Change type to "doughnut", "line", "splineArea", etc.
+			type: "column",
+			dataPoints: analysis.products
+		}
+		]
+	});
+	chart.render();
+}
+
+// analysis.start();
+
+// buildChart();
+
+window.addEventListener("load", analysis.start)
