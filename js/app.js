@@ -1,9 +1,6 @@
 'use strict';
 
-// TODO - bug to fix - See Totals button only works (shows list), on 1st round of 15 clicks
-//    - it keeps counting clicks though, whether button clicked or not
-
-var boardClicked = 0;
+let boardClicked = 0;
 
 function Product (name, filepath) {
     this.name = name;
@@ -55,8 +52,8 @@ const analysis = {
             const randomNum = Math.floor(Math.random() * this.products.length);
             const product = this.products[randomNum];
             if (!this.selectedProducts.includes(product)) {
-                product.timesShown++;
                 this.selectedProducts.push(product);
+                product.timesShown++;
             }
         }
         return this.selectedProducts;
@@ -83,19 +80,19 @@ function registerImageClick() {
     
     boardClicked++;
     if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
-        const elContainer = document.getElementById('button-container');
+        const elButtonContainer = document.getElementById('button-container');
         const elButton = document.createElement('button');
         elButton.id='button';
         elButton.textContent = 'See Totals';
-        elContainer.appendChild(elButton);
+        elButtonContainer.appendChild(elButton);
         
     } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
         const buttonToRemove = document.getElementById('button');
         const elContainer = buttonToRemove.parentNode;
         elContainer.removeChild(buttonToRemove);
-        const list = document.getElementById('list-container');
-        if (list.style.display !== 'none') {
-            list.style.display = 'none';
+        const elListContainer = document.getElementById('list-container');
+        if (elListContainer.style.display !== 'none') {
+            elListContainer.style.display = 'none';
         }
     }
     
@@ -103,12 +100,10 @@ function registerImageClick() {
         const index = event.target.src.lastIndexOf('/') + 1;
         const strIndex = event.target.src.substring(index);
         const slicedIndex = strIndex.slice(0, -4);
-        //console.log(strIndex.slice(0, -4));
         for (let i = 0; i < analysis.products.length; i++) {
             const product = analysis.products[i];
             if (slicedIndex === product.name) {
                 product.timesClicked++;
-                //console.log(product.name, product.timesClicked);
             }
         }
     }
@@ -116,19 +111,18 @@ function registerImageClick() {
 
 function registerButtonClick() {
     const elListContainer = document.getElementById('list-container');
-    if (boardClicked < 20) {
+    if (boardClicked < 16) {
         for (let i = 0; i < analysis.products.length; i++) {
             const elListItem = document.createElement('li');
-            elListItem.textContent = analysis.products[i].timesClicked + ' votes for ' + analysis.products[i].name;
+            elListItem.textContent = analysis.products[i].name + ' shown ' + analysis.products[i].timesShown + ' times, and voted for ' + analysis.products[i].timesClicked + ' times.';
             elListContainer.appendChild(elListItem);
         } 
     } else {
         for (let i = 0; i < analysis.products.length; i++) {
         const elListItem = document.getElementsByTagName('li');
-        elListItem.textContent = analysis.products[i].timesClicked + ' votes for ' + analysis.products[i].name;
-        const list = document.getElementById('list-container');    
-        if (list.style.display = 'none') {
-            list.style.display = 'block';
+        elListItem.textContent = analysis.products[i].name + ' shown ' + analysis.products[i].timesShown + ' times, and voted for ' + analysis.products[i].timesClicked + ' times.';
+        if (elListContainer.style.display = 'none') {
+            elListContainer.style.display = 'block';
             }
         }
     }

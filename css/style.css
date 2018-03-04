@@ -8,7 +8,6 @@ hgroup {
 }
 
 h1 {
-    /* align-self: center; */
     font-family: 'Forum', cursive;
     color: #4E5903;
 }
@@ -31,7 +30,6 @@ section {
 section img {
     margin: 5px;
     border: 1px solid black;
-    /* padding: 5px; */
 }
 
 img {
