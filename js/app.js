@@ -90,10 +90,6 @@ function registerImageClick() {
         const buttonToRemove = document.getElementById('button');
         const elContainer = buttonToRemove.parentNode;
         elContainer.removeChild(buttonToRemove);
-        const elListContainer = document.getElementById('list-container');
-        if (elListContainer.style.display !== 'none') {
-            elListContainer.style.display = 'none';
-        }
     }
 
     if (event.target.tagName === 'IMG') {
@@ -113,8 +109,6 @@ function registerButtonClick() {
     const elButtonContainer = document.getElementById('chart-container');
     elButtonContainer.innerHTML = '';
     buildChart();
-    // if (boardClicked < 16) {
-    // }
 }
 
 function buildChart() {
