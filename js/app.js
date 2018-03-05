@@ -110,38 +110,12 @@ function registerImageClick() {
 }
 
 function registerButtonClick() {
-    const elListContainer = document.getElementById('list-container');
-    if (boardClicked < 16) {
-      buildChart();
-    //
-    //     for (let i = 0; i < analysis.products.length; i++) {
-    //         const elListItem = document.createElement('li');
-    //         elListItem.textContent = analysis.products[i].label + ' shown ' + analysis.products[i].timesShown + ' times, and voted for ' + analysis.products[i].y + ' times.';
-    //         elListContainer.appendChild(elListItem);
-    //     }
-    // } else {
-    //   buildChart();
-    //     for (let i = 0; i < analysis.products.length; i++) {
-    //     const elListItem = document.getElementsByTagName('li');
-    //     elListItem.textContent = analysis.products[i].label + ' shown ' + analysis.products[i].timesShown + ' times, and voted for ' + analysis.products[i].y + ' times.';
-    //     if (elListContainer.style.display = 'none') {
-    //         elListContainer.style.display = 'block';
-    //         }
-    //     }
-    }
+    const elButtonContainer = document.getElementById('chart-container');
+    elButtonContainer.innerHTML = '';
+    buildChart();
+    // if (boardClicked < 16) {
+    // }
 }
-
-//
-//   console.log("test string", analysis.products.name);
-//
-// function addTimesClicked() {
-//   for (let index = 0; index < images.length; index++) {
-//   // images.y.textContent = analysis.products[index].timesClicked;
-//
-//   }
-// }
-//
-// addTimesClicked();
 
 function buildChart() {
 	var chart = new CanvasJS.Chart("chart-container", {
@@ -150,7 +124,6 @@ function buildChart() {
 		},
 		data: [
 		{
-			// Change type to "doughnut", "line", "splineArea", etc.
 			type: "column",
 			dataPoints: analysis.products
 		}
@@ -158,9 +131,5 @@ function buildChart() {
 	});
 	chart.render();
 }
-
-// analysis.start();
-
-// buildChart();
 
 window.addEventListener("load", analysis.start)
