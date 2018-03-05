@@ -111,20 +111,14 @@ function registerImageClick() {
 
 function registerButtonClick() {
     const elListContainer = document.getElementById('list-container');
-    if (boardClicked < 16) {
-        for (let i = 0; i < analysis.products.length; i++) {
-            const elListItem = document.createElement('li');
-            elListItem.textContent = analysis.products[i].name + ' shown ' + analysis.products[i].timesShown + ' times, and voted for ' + analysis.products[i].timesClicked + ' times.';
-            elListContainer.appendChild(elListItem);
-        } 
-    } else {
-        for (let i = 0; i < analysis.products.length; i++) {
-        const elListItem = document.getElementsByTagName('li');
+    elListContainer.innerHTML="";
+    for (let i = 0; i < analysis.products.length; i++) {
+        const elListItem = document.createElement('li');
         elListItem.textContent = analysis.products[i].name + ' shown ' + analysis.products[i].timesShown + ' times, and voted for ' + analysis.products[i].timesClicked + ' times.';
-        if (elListContainer.style.display = 'none') {
-            elListContainer.style.display = 'block';
-            }
-        }
+        elListContainer.appendChild(elListItem);
+    }
+    if (elListContainer.style.display = 'none') {
+        elListContainer.style.display = 'block';
     }
 }
 
