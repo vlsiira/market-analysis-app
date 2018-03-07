@@ -9,9 +9,9 @@ function Product (name, filepath) {
     this.y = 0;
 }
 
-Product.prototype.render = function () {
+const render = function (filepath) {
     const elImages = document.createElement('img');
-    elImages.src = this.filepath;
+    elImages.src = filepath;
     return elImages;
 }
 
@@ -37,7 +37,7 @@ const analysis = {
                 new Product('wine_glass', 'img/wine_glass.jpg'),
             );
         } else {
-            JSON.parse(localStorage.getItem('clicks'));
+            analysis.products = JSON.parse(localStorage.getItem('clicks'));
         }
 
         analysis.randomizeProducts();
@@ -52,7 +52,7 @@ const analysis = {
 
     randomizeProducts: function () {
         analysis.selectedProducts = [];
-        while (this.selectedProducts.length < 3) {
+        while (analysis.selectedProducts.length < 3) {
             const randomNum = Math.floor(Math.random() * analysis.products.length);
             const product = analysis.products[randomNum];
             if (!analysis.selectedProducts.includes(product)) {
@@ -66,7 +66,7 @@ const analysis = {
     showProducts: function () {
         const elContainer = document.getElementById('images-container');
         for (let i = 0; i < analysis.selectedProducts.length; i++) {
-            elContainer.appendChild(analysis.selectedProducts[i].render());
+            elContainer.appendChild(render(analysis.selectedProducts[i].filepath));
         }
     },
 
