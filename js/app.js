@@ -100,7 +100,7 @@ function registerImageClick() {
             const product = analysis.products[i];
             if (slicedIndex === product.label) {
                 product.y++;
-                localStorage.setItem('clicks', JSON.stringify(product));
+                //localStorage.setItem('clicks', JSON.stringify(product));
             }
         }
     }
@@ -111,6 +111,7 @@ function registerButtonClick() {
     const elButtonContainer = document.getElementById('chart-container');
     elButtonContainer.innerHTML = '';
     buildChart();
+    localStorage.setItem('clicks', JSON.stringify(analysis.products));
 }
 
 function buildChart() {
