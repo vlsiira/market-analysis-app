@@ -85,13 +85,13 @@ function registerImageClick() {
         elButton.id='button';
         elButton.textContent = 'See Totals';
         elButtonContainer.appendChild(elButton);
-
+        
     } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
         const buttonToRemove = document.getElementById('button');
         const elContainer = buttonToRemove.parentNode;
         elContainer.removeChild(buttonToRemove);
     }
-
+    
     if (event.target.tagName === 'IMG') {
         const index = event.target.src.lastIndexOf('/') + 1;
         const strIndex = event.target.src.substring(index);
@@ -100,6 +100,7 @@ function registerImageClick() {
             const product = analysis.products[i];
             if (slicedIndex === product.label) {
                 product.y++;
+                localStorage.setItem('clicks', JSON.stringify(product));
             }
         }
     }
