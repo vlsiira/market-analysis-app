@@ -106,6 +106,7 @@ function registerImageClick() {
 }
 
 function registerButtonClick() {
+
     const elButtonContainer = document.getElementById('chart-container');
     elButtonContainer.innerHTML = '';
     buildChart();
@@ -124,6 +125,7 @@ function buildChart() {
 		]
 	});
 	chart.render();
+
 }
 
 window.addEventListener("load", analysis.start)
