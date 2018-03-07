@@ -17,17 +17,32 @@ section {
     background-color: #E7F29A;
     margin: 10px;
     border: 2px solid #4E5903;
-    padding: 10px;
+    padding: 0px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
 section img {
-    margin: 5px;
+    margin: 15px;
     border: 1px solid black;
 }
 
 img {
     height: 250px;
+}
+
+#button-container {
+    text-align: center;
+    margin: 10px;
+}
+
+button {
+    width: 13em;
+    height: 4em;
+    font-size: 1.3em;    
+}
+
+#chart-container {
+    margin: 10 px;
 }
