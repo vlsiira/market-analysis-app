@@ -19,22 +19,26 @@ const analysis = {
     products: [],
     selectedProducts: [],
     start: function () {
-        analysis.products.push(
-            new Product ('bag', 'img/bag.jpg'),
-            new Product('banana', 'img/banana.jpg'),
-            new Product('boots', 'img/boots.jpg'),
-            new Product('chair', 'img/chair.jpg'),
-            new Product('cthulhu', 'img/cthulhu.jpg'),
-            new Product('dragon', 'img/dragon.jpg'),
-            new Product('pen', 'img/pen.jpg'),
-            new Product('scissors', 'img/scissors.jpg'),
-            new Product('shark', 'img/shark.jpg'),
-            new Product('sweep', 'img/sweep.jpg'),
-            new Product('unicorn', 'img/unicorn.jpg'),
-            new Product('usb', 'img/usb.jpg'),
-            new Product('water_can', 'img/water_can.jpg'),
-            new Product('wine_glass', 'img/wine_glass.jpg'),
-        );
+        if (localStorage.getItem('clicks') == null) {
+            analysis.products.push(
+                new Product ('bag', 'img/bag.jpg'),
+                new Product('banana', 'img/banana.jpg'),
+                new Product('boots', 'img/boots.jpg'),
+                new Product('chair', 'img/chair.jpg'),
+                new Product('cthulhu', 'img/cthulhu.jpg'),
+                new Product('dragon', 'img/dragon.jpg'),
+                new Product('pen', 'img/pen.jpg'),
+                new Product('scissors', 'img/scissors.jpg'),
+                new Product('shark', 'img/shark.jpg'),
+                new Product('sweep', 'img/sweep.jpg'),
+                new Product('unicorn', 'img/unicorn.jpg'),
+                new Product('usb', 'img/usb.jpg'),
+                new Product('water_can', 'img/water_can.jpg'),
+                new Product('wine_glass', 'img/wine_glass.jpg'),
+            );
+        } else {
+            JSON.parse(localStorage.getItem('clicks'));
+        }
 
         analysis.randomizeProducts();
         analysis.showProducts();
