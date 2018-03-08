@@ -9,9 +9,9 @@ function Product (name, filepath) {
     this.y = 0;
 }
 
-Product.prototype.render = function () {
+const render = function (filepath) {
     const elImages = document.createElement('img');
-    elImages.src = this.filepath;
+    elImages.src = filepath;
     return elImages;
 }
 
@@ -19,22 +19,26 @@ const analysis = {
     products: [],
     selectedProducts: [],
     start: function () {
-        analysis.products.push(
-            new Product ('bag', 'img/bag.jpg'),
-            new Product('banana', 'img/banana.jpg'),
-            new Product('boots', 'img/boots.jpg'),
-            new Product('chair', 'img/chair.jpg'),
-            new Product('cthulhu', 'img/cthulhu.jpg'),
-            new Product('dragon', 'img/dragon.jpg'),
-            new Product('pen', 'img/pen.jpg'),
-            new Product('scissors', 'img/scissors.jpg'),
-            new Product('shark', 'img/shark.jpg'),
-            new Product('sweep', 'img/sweep.jpg'),
-            new Product('unicorn', 'img/unicorn.jpg'),
-            new Product('usb', 'img/usb.jpg'),
-            new Product('water_can', 'img/water_can.jpg'),
-            new Product('wine_glass', 'img/wine_glass.jpg'),
-        );
+        if (localStorage.getItem('clicks') == null) {
+            analysis.products.push(
+                new Product ('bag', 'img/bag.jpg'),
+                new Product('banana', 'img/banana.jpg'),
+                new Product('boots', 'img/boots.jpg'),
+                new Product('chair', 'img/chair.jpg'),
+                new Product('cthulhu', 'img/cthulhu.jpg'),
+                new Product('dragon', 'img/dragon.jpg'),
+                new Product('pen', 'img/pen.jpg'),
+                new Product('scissors', 'img/scissors.jpg'),
+                new Product('shark', 'img/shark.jpg'),
+                new Product('sweep', 'img/sweep.jpg'),
+                new Product('unicorn', 'img/unicorn.jpg'),
+                new Product('usb', 'img/usb.jpg'),
+                new Product('water_can', 'img/water_can.jpg'),
+                new Product('wine_glass', 'img/wine_glass.jpg'),
+            );
+        } else {
+            analysis.products = JSON.parse(localStorage.getItem('clicks'));
+        }
 
         analysis.randomizeProducts();
         analysis.showProducts();
@@ -48,7 +52,7 @@ const analysis = {
 
     randomizeProducts: function () {
         analysis.selectedProducts = [];
-        while (this.selectedProducts.length < 3) {
+        while (analysis.selectedProducts.length < 3) {
             const randomNum = Math.floor(Math.random() * analysis.products.length);
             const product = analysis.products[randomNum];
             if (!analysis.selectedProducts.includes(product)) {
@@ -62,7 +66,7 @@ const analysis = {
     showProducts: function () {
         const elContainer = document.getElementById('images-container');
         for (let i = 0; i < analysis.selectedProducts.length; i++) {
-            elContainer.appendChild(analysis.selectedProducts[i].render());
+            elContainer.appendChild(render(analysis.selectedProducts[i].filepath));
         }
     },
 
@@ -73,25 +77,6 @@ const analysis = {
 }
 
 function registerImageClick() {
-    console.log(boardClicked);
-    analysis.clearBoard();
-    analysis.randomizeProducts();
-    analysis.showProducts();
-
-    boardClicked++;
-    if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
-        const elButtonContainer = document.getElementById('button-container');
-        const elButton = document.createElement('button');
-        elButton.id='button';
-        elButton.textContent = 'See Totals';
-        elButtonContainer.appendChild(elButton);
-
-    } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
-        const buttonToRemove = document.getElementById('button');
-        const elContainer = buttonToRemove.parentNode;
-        elContainer.removeChild(buttonToRemove);
-    }
-
     if (event.target.tagName === 'IMG') {
         const index = event.target.src.lastIndexOf('/') + 1;
         const strIndex = event.target.src.substring(index);
@@ -100,8 +85,29 @@ function registerImageClick() {
             const product = analysis.products[i];
             if (slicedIndex === product.label) {
                 product.y++;
+                localStorage.setItem('clicks', JSON.stringify(analysis.products));
             }
         }
+
+        console.log(boardClicked);
+        analysis.clearBoard();
+        analysis.randomizeProducts();
+        analysis.showProducts();
+        
+        boardClicked++;
+        if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
+            const elButtonContainer = document.getElementById('button-container');
+            const elButton = document.createElement('button');
+            elButton.id='button';
+            elButton.textContent = 'See Totals';
+            elButtonContainer.appendChild(elButton);
+            
+        } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
+            const buttonToRemove = document.getElementById('button');
+            const elContainer = buttonToRemove.parentNode;
+            elContainer.removeChild(buttonToRemove);
+        }
+        
     }
 }
 
