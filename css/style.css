@@ -43,6 +43,10 @@ button {
     font-size: 1.3em;    
 }
 
+button:hover {
+    color: green;
+}
+
 #chart-container {
     margin: 10 px;
 }

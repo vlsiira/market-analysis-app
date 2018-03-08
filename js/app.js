@@ -77,25 +77,6 @@ const analysis = {
 }
 
 function registerImageClick() {
-    console.log(boardClicked);
-    analysis.clearBoard();
-    analysis.randomizeProducts();
-    analysis.showProducts();
-
-    boardClicked++;
-    if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
-        const elButtonContainer = document.getElementById('button-container');
-        const elButton = document.createElement('button');
-        elButton.id='button';
-        elButton.textContent = 'See Totals';
-        elButtonContainer.appendChild(elButton);
-        
-    } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
-        const buttonToRemove = document.getElementById('button');
-        const elContainer = buttonToRemove.parentNode;
-        elContainer.removeChild(buttonToRemove);
-    }
-    
     if (event.target.tagName === 'IMG') {
         const index = event.target.src.lastIndexOf('/') + 1;
         const strIndex = event.target.src.substring(index);
@@ -107,6 +88,26 @@ function registerImageClick() {
                 localStorage.setItem('clicks', JSON.stringify(analysis.products));
             }
         }
+
+        console.log(boardClicked);
+        analysis.clearBoard();
+        analysis.randomizeProducts();
+        analysis.showProducts();
+        
+        boardClicked++;
+        if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
+            const elButtonContainer = document.getElementById('button-container');
+            const elButton = document.createElement('button');
+            elButton.id='button';
+            elButton.textContent = 'See Totals';
+            elButtonContainer.appendChild(elButton);
+            
+        } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
+            const buttonToRemove = document.getElementById('button');
+            const elContainer = buttonToRemove.parentNode;
+            elContainer.removeChild(buttonToRemove);
+        }
+        
     }
 }
 
