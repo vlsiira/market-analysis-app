@@ -45,6 +45,7 @@ button {
 
 button:hover {
     color: green;
+    border-color: green;
 }
 
 #chart-container {
