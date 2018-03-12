@@ -23,14 +23,25 @@ section {
     flex-wrap: wrap;
 }
 
-section img {
+img {
     margin: 15px;
     border: 1px solid black;
+    height: 250px;
+    transition: all 1s;
 }
 
-img {
-    height: 250px;
+img:hover {
+    height: 265px;
 }
+
+/* .images.opacity {
+    opacity: 1;
+    transition: all 2s;
+}
+
+.images.opacity {
+    opacity: .2;
+} */
 
 #button-container {
     text-align: center;
@@ -45,8 +56,19 @@ button {
 
 button:hover {
     color: green;
+    border-color: green;
+}
+
+button:active {
+    color: limegreen;
 }
 
 #chart-container {
     margin: 10 px;
+    transition: all 1s;
+    opacity: .6;
+}
+
+#chart-container:hover {
+    opacity: 1;
 }
