@@ -12,7 +12,7 @@ function Product (name, filepath) {
 const render = function (filepath) {
     const images = document.createElement('img');
     images.src = filepath;
-    images.className = 'images';
+    // images.className = 'images';
     return images;
 }
 
@@ -91,6 +91,12 @@ function registerImageClick() {
         }
 
         console.log(boardClicked);
+
+        // const images = document.getElementsByClassName('images');
+        // function fade() {
+        //     imgages.classList.add('opacity');
+        // }
+
         analysis.clearBoard();
         analysis.randomizeProducts();
         analysis.showProducts();

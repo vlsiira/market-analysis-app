@@ -34,8 +34,13 @@ img:hover {
     height: 265px;
 }
 
-/* img:active {
-    border: 3px solid red;
+/* .images.opacity {
+    opacity: 1;
+    transition: all 2s;
+}
+
+.images.opacity {
+    opacity: .2;
 } */
 
 #button-container {
