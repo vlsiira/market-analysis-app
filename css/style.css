@@ -34,7 +34,7 @@ img:hover {
     height: 265px;
 }
 
-/* img:active {     // active not working on images
+/* img:active {
     border: 3px solid red;
 } */
 
@@ -54,15 +54,14 @@ button:hover {
     border-color: green;
 }
 
-/* button:active {
-    transition: color;
-    color: red;
-} */
+button:active {
+    color: limegreen;
+}
 
 #chart-container {
     margin: 10 px;
     transition: all 1s;
-    opacity: .5;
+    opacity: .6;
 }
 
 #chart-container:hover {

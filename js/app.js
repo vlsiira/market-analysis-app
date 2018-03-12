@@ -12,6 +12,7 @@ function Product (name, filepath) {
 const render = function (filepath) {
     const images = document.createElement('img');
     images.src = filepath;
+    images.className = 'images';
     return images;
 }
 
