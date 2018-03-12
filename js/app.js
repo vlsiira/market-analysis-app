@@ -10,9 +10,9 @@ function Product (name, filepath) {
 }
 
 const render = function (filepath) {
-    const elImages = document.createElement('img');
-    elImages.src = filepath;
-    return elImages;
+    const images = document.createElement('img');
+    images.src = filepath;
+    return images;
 }
 
 const analysis = {
@@ -43,11 +43,11 @@ const analysis = {
         analysis.randomizeProducts();
         analysis.showProducts();
 
-        const elContainer = document.getElementById('images-container');
-        elContainer.addEventListener('click', registerImageClick);
+        const imagesContainer = document.getElementById('images-container');
+        imagesContainer.addEventListener('click', registerImageClick);
 
-        const elButtonContainer = document.getElementById('button-container');
-        elButtonContainer.addEventListener('click', registerButtonClick);
+        const buttonContainer = document.getElementById('button-container');
+        buttonContainer.addEventListener('click', registerButtonClick);
     },
 
     randomizeProducts: function () {
@@ -64,15 +64,15 @@ const analysis = {
     },
 
     showProducts: function () {
-        const elContainer = document.getElementById('images-container');
+        const imagesContainer = document.getElementById('images-container');
         for (let i = 0; i < analysis.selectedProducts.length; i++) {
-            elContainer.appendChild(render(analysis.selectedProducts[i].filepath));
+            imagesContainer.appendChild(render(analysis.selectedProducts[i].filepath));
         }
     },
 
     clearBoard: function () {
-        const elContainer = document.getElementById('images-container');
-        elContainer.textContent = '';
+        const imagesContainer = document.getElementById('images-container');
+        imagesContainer.textContent = '';
     }
 }
 
@@ -96,16 +96,16 @@ function registerImageClick() {
         
         boardClicked++;
         if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
-            const elButtonContainer = document.getElementById('button-container');
-            const elButton = document.createElement('button');
-            elButton.id='button';
-            elButton.textContent = 'See Totals';
-            elButtonContainer.appendChild(elButton);
+            const buttonContainer = document.getElementById('button-container');
+            const button = document.createElement('button');
+            button.id='button';
+            button.textContent = 'See Totals';
+            buttonContainer.appendChild(button);
             
         } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
             const buttonToRemove = document.getElementById('button');
-            const elContainer = buttonToRemove.parentNode;
-            elContainer.removeChild(buttonToRemove);
+            const imagesContainer = buttonToRemove.parentNode;
+            imagesContainer.removeChild(buttonToRemove);
         }
         
     }
@@ -113,8 +113,8 @@ function registerImageClick() {
 
 function registerButtonClick() {
 
-    const elButtonContainer = document.getElementById('chart-container');
-    elButtonContainer.innerHTML = '';
+    const buttonContainer = document.getElementById('chart-container');
+    buttonContainer.innerHTML = '';
     buildChart();
 }
 
