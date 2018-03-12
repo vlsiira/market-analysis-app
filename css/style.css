@@ -30,9 +30,13 @@ img {
     transition: all 1s;
 }
 
-section img:hover {
-    height: 270px;
+img:hover {
+    height: 265px;
 }
+
+/* img:active {     // active not working on images
+    border: 3px solid red;
+} */
 
 #button-container {
     text-align: center;
@@ -57,4 +61,10 @@ button:hover {
 
 #chart-container {
     margin: 10 px;
+    transition: all 1s;
+    opacity: .5;
+}
+
+#chart-container:hover {
+    opacity: 1;
 }
