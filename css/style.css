@@ -23,13 +23,15 @@ section {
     flex-wrap: wrap;
 }
 
-section img {
+img {
     margin: 15px;
     border: 1px solid black;
+    height: 250px;
+    transition: all 1s;
 }
 
-img {
-    height: 250px;
+section img:hover {
+    height: 270px;
 }
 
 #button-container {
@@ -47,6 +49,11 @@ button:hover {
     color: green;
     border-color: green;
 }
+
+/* button:active {
+    transition: color;
+    color: red;
+} */
 
 #chart-container {
     margin: 10 px;
