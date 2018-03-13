@@ -92,10 +92,10 @@ function registerImageClick() {
 
         console.log(boardClicked);
 
-        // const images = document.getElementsByClassName('images');
-        // function fade() {
-        //     imgages.classList.add('opacity');
-        // }
+        const images = document.getElementsByClassName('images');
+        function fade() {
+            images.classList.add('opacity');
+        }
 
         analysis.clearBoard();
         analysis.randomizeProducts();
