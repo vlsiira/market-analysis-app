@@ -30,9 +30,9 @@ img {
     transition: all 1s;
 }
 
-img:hover {
+/* img:hover {
     height: 265px;
-}
+} */
 
 .fadeOut {
     transition: all 2s;
