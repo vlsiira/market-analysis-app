@@ -91,6 +91,10 @@ function fade() {
             }
         }
     }
+
+    boardClicked++;
+    console.log(boardClicked);
+
     const images = document.getElementsByTagName('img');
     for (let i = 0; i < analysis.products.length; i++) {
         images[i].classList.add('fadeOut');
@@ -99,28 +103,23 @@ function fade() {
 
 // function registerImageClick() {
 
-//         // put in transitionend handler
-//         console.log(boardClicked);
-
-//         analysis.clearBoard();
-//         analysis.randomizeProducts();
-//         analysis.showProducts();
+//     analysis.clearBoard();
+//     analysis.randomizeProducts();
+//     analysis.showProducts();
+    
+//     if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
+//         const buttonContainer = document.getElementById('button-container');
+//         const button = document.createElement('button');
+//         button.id='button';
+//         button.textContent = 'See Totals';
+//         buttonContainer.appendChild(button);
         
-//         boardClicked++;
-//         if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
-//             const buttonContainer = document.getElementById('button-container');
-//             const button = document.createElement('button');
-//             button.id='button';
-//             button.textContent = 'See Totals';
-//             buttonContainer.appendChild(button);
-            
-//         } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
-//             const buttonToRemove = document.getElementById('button');
-//             const imagesContainer = buttonToRemove.parentNode;
-//             imagesContainer.removeChild(buttonToRemove);
-//         }
-//         // in transitionend handler
+//     } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
+//         const buttonToRemove = document.getElementById('button');
+//         const imagesContainer = buttonToRemove.parentNode;
+//         imagesContainer.removeChild(buttonToRemove);
 //     }
+// }
 
 function registerButtonClick() {
 
