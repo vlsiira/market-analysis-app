@@ -46,7 +46,7 @@ const analysis = {
 
         const imagesContainer = document.getElementById('images-container');
         imagesContainer.addEventListener('click', fade);
-        imagesContainer.addEventListener('transitionend', registerImageClick);
+        imagesContainer.addEventListener('transitionend', changeImages);
         
         const buttonContainer = document.getElementById('button-container');
         buttonContainer.addEventListener('click', registerButtonClick);
@@ -101,7 +101,7 @@ function fade() {
     }
 }
 
-function registerImageClick() {
+function changeImages() {
 
     analysis.clearBoard();
     analysis.randomizeProducts();
