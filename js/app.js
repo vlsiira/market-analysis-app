@@ -79,6 +79,18 @@ const analysis = {
 }
 
 function fade() {
+    if (event.target.tagName === 'IMG') {
+        const index = event.target.src.lastIndexOf('/') + 1;
+        const strIndex = event.target.src.substring(index);
+        const slicedIndex = strIndex.slice(0, -4);
+        for (let i = 0; i < analysis.products.length; i++) {
+            const product = analysis.products[i];
+            if (slicedIndex === product.label) {
+                product.y++;
+                localStorage.setItem('clicks', JSON.stringify(analysis.products));
+            }
+        }
+    }
     const images = document.getElementsByTagName('img');
     for (let i = 0; i < analysis.products.length; i++) {
         images[i].classList.add('fadeOut');
@@ -86,17 +98,6 @@ function fade() {
 }
 
 // function registerImageClick() {
-//     if (event.target.tagName === 'IMG') {
-//         const index = event.target.src.lastIndexOf('/') + 1;
-//         const strIndex = event.target.src.substring(index);
-//         const slicedIndex = strIndex.slice(0, -4);
-//         for (let i = 0; i < analysis.products.length; i++) {
-//             const product = analysis.products[i];
-//             if (slicedIndex === product.label) {
-//                 product.y++;
-//                 localStorage.setItem('clicks', JSON.stringify(analysis.products));
-//             }
-//         }
 
 //         // put in transitionend handler
 //         console.log(boardClicked);
@@ -120,7 +121,6 @@ function fade() {
 //         }
 //         // in transitionend handler
 //     }
-// }
 
 function registerButtonClick() {
 
