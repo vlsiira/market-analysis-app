@@ -45,8 +45,9 @@ const analysis = {
         analysis.showProducts();
 
         const imagesContainer = document.getElementById('images-container');
-        imagesContainer.addEventListener('click', registerImageClick);
-
+        imagesContainer.addEventListener('click', fade);
+        // imagesContainer.addEventListener('transitionend', registerImageClick);
+        
         const buttonContainer = document.getElementById('button-container');
         buttonContainer.addEventListener('click', registerButtonClick);
     },
@@ -77,46 +78,49 @@ const analysis = {
     }
 }
 
-function registerImageClick() {
-    if (event.target.tagName === 'IMG') {
-        const index = event.target.src.lastIndexOf('/') + 1;
-        const strIndex = event.target.src.substring(index);
-        const slicedIndex = strIndex.slice(0, -4);
-        for (let i = 0; i < analysis.products.length; i++) {
-            const product = analysis.products[i];
-            if (slicedIndex === product.label) {
-                product.y++;
-                localStorage.setItem('clicks', JSON.stringify(analysis.products));
-            }
-        }
-
-        console.log(boardClicked);
-
-        const images = document.getElementsByClassName('images');
-        function fade() {
-            images.classList.add('opacity');
-        }
-
-        analysis.clearBoard();
-        analysis.randomizeProducts();
-        analysis.showProducts();
-        
-        boardClicked++;
-        if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
-            const buttonContainer = document.getElementById('button-container');
-            const button = document.createElement('button');
-            button.id='button';
-            button.textContent = 'See Totals';
-            buttonContainer.appendChild(button);
-            
-        } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
-            const buttonToRemove = document.getElementById('button');
-            const imagesContainer = buttonToRemove.parentNode;
-            imagesContainer.removeChild(buttonToRemove);
-        }
-        
+function fade() {
+    const images = document.getElementsByTagName('img');
+    for (let i = 0; i < analysis.products.length; i++) {
+        images[i].classList.add('fadeOut');
     }
 }
+
+// function registerImageClick() {
+//     if (event.target.tagName === 'IMG') {
+//         const index = event.target.src.lastIndexOf('/') + 1;
+//         const strIndex = event.target.src.substring(index);
+//         const slicedIndex = strIndex.slice(0, -4);
+//         for (let i = 0; i < analysis.products.length; i++) {
+//             const product = analysis.products[i];
+//             if (slicedIndex === product.label) {
+//                 product.y++;
+//                 localStorage.setItem('clicks', JSON.stringify(analysis.products));
+//             }
+//         }
+
+//         // put in transitionend handler
+//         console.log(boardClicked);
+
+//         analysis.clearBoard();
+//         analysis.randomizeProducts();
+//         analysis.showProducts();
+        
+//         boardClicked++;
+//         if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
+//             const buttonContainer = document.getElementById('button-container');
+//             const button = document.createElement('button');
+//             button.id='button';
+//             button.textContent = 'See Totals';
+//             buttonContainer.appendChild(button);
+            
+//         } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
+//             const buttonToRemove = document.getElementById('button');
+//             const imagesContainer = buttonToRemove.parentNode;
+//             imagesContainer.removeChild(buttonToRemove);
+//         }
+//         // in transitionend handler
+//     }
+// }
 
 function registerButtonClick() {
 
