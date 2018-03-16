@@ -12,7 +12,6 @@ function Product (name, filepath) {
 const render = function (filepath) {
     const images = document.createElement('img');
     images.src = filepath;
-    // images.className = 'images';
     return images;
 }
 
@@ -79,6 +78,7 @@ const analysis = {
 }
 
 function fade() {
+    // identifies individual images & increases their click counts
     if (event.target.tagName === 'IMG') {
         const index = event.target.src.lastIndexOf('/') + 1;
         const strIndex = event.target.src.substring(index);
@@ -95,6 +95,11 @@ function fade() {
     boardClicked++;
     console.log(boardClicked);
 
+    // fades images on click
+    // problem- have error message on click- 'cannot read property 'classList' of
+    //          undefined at HTMLElement.fade.'  In Elements tab in Dev Tools,
+    //          'class='fadeOut'' appears in img tags when clicked, then disappears.
+    //          Is error message due to the class disappearing after click?
     const images = document.getElementsByTagName('img');
     for (let i = 0; i < analysis.products.length; i++) {
         images[i].classList.add('fadeOut');
@@ -107,6 +112,7 @@ function changeImages() {
     analysis.randomizeProducts();
     analysis.showProducts();
     
+    // shows 'See Totals' button on 15th (and multiples of) click
     if ((boardClicked % 15 === 0) && (boardClicked !== 0)) {
         const buttonContainer = document.getElementById('button-container');
         const button = document.createElement('button');
@@ -114,6 +120,7 @@ function changeImages() {
         button.textContent = 'See Totals';
         buttonContainer.appendChild(button);
         
+    // removes 'See Totals' button on 16th (and multiples of) click
     } else if ((boardClicked % 15 === 1) && (boardClicked !== 1)) {
         const buttonToRemove = document.getElementById('button');
         const imagesContainer = buttonToRemove.parentNode;

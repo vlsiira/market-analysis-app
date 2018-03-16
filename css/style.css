@@ -35,7 +35,7 @@ img {
 } */
 
 .fadeOut {
-    transition: all 1s;
+    transition: all .5s;
     opacity: 0;
 }
 
